@@ -50,10 +50,10 @@ a {
     -webkit-transition: .3s all ease;
     -o-transition: .3s all ease;
     transition: .3s all ease;
-    position: relative; 
+    position: relative;
     padding-right: 100px;
     }
-    
+
     @media (min-width: 768px) {
       .custom-navbar .custom-navbar-nav li a:before {
         content: "";
@@ -580,7 +580,7 @@ a {
       border-radius: 10px !important; }
   .footer-section .sofa-img {
     position: absolute;
-    top: -200px;
+    top: -300px;
     z-index: 1;
     right: 0; }
     .footer-section .sofa-img img {
