@@ -706,3 +706,14 @@ textarea {
     height: 50px;
     border-radius: 50%;
     background: rgba(59, 93, 80, 0.2); }
+
+    #categorySelector {
+      max-width: 300px;
+      margin: 20px  20px;
+      float: right;
+    }
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
