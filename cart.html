@@ -33,7 +33,6 @@
           </li>
           <li><a class="nav-link" href="shop.html">Shop</a></li>
           <li><a class="nav-link" href="about.html">About us</a></li>
-          <li><a class="nav-link" href="services.html">Services</a></li>
           <li><a class="nav-link" href="contact.html">Contact us</a></li>
         </ul>
         <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
@@ -97,16 +96,6 @@
 			</div>
 		  </div>
 		  <div class="row">
-			<div class="col-md-12">
-			  <label class="text-black h4" for="coupon">Coupon</label>
-			  <p>Enter your coupon code if you have one.</p>
-			</div>
-			<div class="col-md-8 mb-3 mb-md-0">
-			  <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
-			</div>
-			<div class="col-md-4">
-			  <button class="btn btn-black">Apply Coupon</button>
-			</div>
 		  </div>
 		</div>
 		<div class="col-md-6 pl-5">
@@ -150,7 +139,7 @@
   <footer class="footer-section">
     <div class="container relative">
       <div class="sofa-img">
-        <img src="images/tower.png" alt="Image" class="img-fluid">
+        <img src="images/tower.png" alt="Image" class="img-fluid" style="padding-top: 50px;">
       </div>
 
       <div class="row">
@@ -231,7 +220,6 @@
 					const cartSubtotalElement = document.getElementById('cart-subtotal');
 					const cartTotalElement = document.getElementById('cart-total');
 		
-					console.log("Current cart items:", cart);
 					cartItemsContainer.innerHTML = ''; 
 					let subtotal = 0;
 		
@@ -262,23 +250,26 @@
 					cartTotalElement.textContent = `₱${subtotal.toFixed(2)}`;
 				}
 		
-				function updateQuantity(input) {
+				window.updateQuantity = function(input) {
 					const productId = input.getAttribute('data-id');
 					const newQuantity = parseInt(input.value);
 		
 					let cart = JSON.parse(localStorage.getItem('cart')) || [];
 					const productIndex = cart.findIndex(item => item.id === productId);
 		
-					if (productIndex > -1 && newQuantity > 0) {
-						cart[productIndex].quantity = newQuantity;
+					if (productIndex > -1) {
+						if (newQuantity > 0) {
+							cart[productIndex].quantity = newQuantity;
+						} else {
+							removeFromCart(productId);
+							return; // Exit the function if the item is removed
+						}
 						localStorage.setItem('cart', JSON.stringify(cart));
-						updateCartDisplay(); 
-					} else if (productIndex > -1 && newQuantity <= 0) {
-						removeFromCart(productId);
+						updateCartDisplay(); // Update the display after changing the quantity
 					}
 				}
 		
-				function removeFromCart(productId) {
+				window.removeFromCart = function(productId) {
 					let cart = JSON.parse(localStorage.getItem('cart')) || [];
 					cart = cart.filter(item => item.id !== productId);
 					localStorage.setItem('cart', JSON.stringify(cart));
